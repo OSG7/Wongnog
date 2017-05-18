@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "872255776736",
+    "firebase_url": "https://wongnog-2c9b9.firebaseio.com",
+    "project_id": "wongnog-2c9b9",
+    "storage_bucket": "wongnog-2c9b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872255776736:android:e7ebfa8b2dacf375",
+        "android_client_info": {
+          "package_name": "com.studio.ligament.wongnog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872255776736-dqjc997s47kbm75uoms79oi1envoeu7h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.studio.ligament.wongnog",
+            "certificate_hash": "4320f62a9af1f76c5cb689b2b8ab7f1e282686eb"
+          }
+        },
+        {
+          "client_id": "872255776736-lfoqu68tj0rl9ustm72d50e1s2uuehit.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv6m50yCDGU8dm-DUtHXOpfApli02dTts"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872255776736-lfoqu68tj0rl9ustm72d50e1s2uuehit.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

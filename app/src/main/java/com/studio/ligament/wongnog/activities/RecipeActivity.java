@@ -1,0 +1,96 @@
+package com.studio.ligament.wongnog.activities;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+import com.studio.ligament.wongnog.R;
+import com.studio.ligament.wongnog.data.models.Recipe;
+import com.studio.ligament.wongnog.utils.DisplayUtils;
+import com.studio.ligament.wongnog.view.components.RecipeDetailView;
+
+public class RecipeActivity extends BaseActivity {
+    public static final String EXTRA_RECIPE = "recipe";
+    public static final String EXTRA_IMAGE = "ItemDetailActivity:image";
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.recipe_detail)
+    RecipeDetailView recipeDetailView;
+
+    private Recipe recipe;
+
+    public static void launch(Activity activity, Recipe recipe, ImageView transitionView, String url) {
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                activity,
+                transitionView,
+                EXTRA_IMAGE);
+
+        Intent intent = new Intent(activity, RecipeActivity.class);
+        intent.putExtra(EXTRA_RECIPE, recipe.toJson());
+        intent.putExtra(EXTRA_IMAGE, url);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipe_detail);
+        ButterKnife.bind(this);
+
+        ImageView recipeImageView = (ImageView) recipeDetailView.findViewById(R.id.recipe_image);
+        ViewCompat.setTransitionName(recipeImageView, EXTRA_IMAGE);
+
+        recipe = Recipe.fromJson(getIntent().getStringExtra(EXTRA_RECIPE), Recipe.class);
+
+        setupActionBar();
+        setupViews();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.action_settings:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setupActionBar() {
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) toolbar.getLayoutParams();
+        layoutParams.setMargins(0, DisplayUtils.getStatusBarHeight(this), 0, 0);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    private void setupViews() {
+        recipeDetailView.setRecipe(recipe);
+    }
+}
